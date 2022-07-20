@@ -1,0 +1,39 @@
+.page-template-traverse {
+  background-color: $white;
+
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .window {
+      position: relative;
+      width: 95%;
+      // height: 1000px;
+      background: url('../images/window-shape.svg');
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+
+      .logo {
+        margin-top: 130px;
+      }
+    }
+    // .wrapper {
+    //   width: 90%;
+
+    //   img {
+    //     max-width: 100%;
+    //   }
+    // }
+  }
+
+  hr {
+    border:none;
+    border-top:2px dashed gray;
+    color:#fff;
+    background-color:#fff;
+    height:1px;
+    width:100%;
+    transform: skewY(-12deg);
+  }
+}

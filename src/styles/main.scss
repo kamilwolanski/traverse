@@ -1,0 +1,12 @@
+//fonts
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300;400;500;600&display=swap');
+
+//bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+//core stylesheet
+@import "./variables";
+@import "./typography";
+
+//page templates
+@import "pageTemplates/traverse";

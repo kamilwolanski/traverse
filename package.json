@@ -15,6 +15,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "bootstrap": "^5.2.0",
     "gatsby": "^4.19.0",
     "gatsby-plugin-image": "^2.19.0",
     "gatsby-plugin-manifest": "^4.19.0",
@@ -23,9 +24,11 @@
     "gatsby-plugin-sharp": "^4.19.0",
     "gatsby-source-filesystem": "^4.19.0",
     "gatsby-transformer-sharp": "^4.19.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "reactstrap": "^9.1.2",
     "sass": "^1.53.0"
   }
 }
