@@ -8,6 +8,7 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     `gatsby-plugin-image`,
+    `gatsby-transformer-sharp`,
     {
       resolve: "gatsby-plugin-manifest",
       options: {
