@@ -1,11 +1,112 @@
 p {
   font-size: 16px;
-  // color: $light-blue;
-  color: $black;
+  color: $light-blue;
+  font-family: "Red Hat Mono", monospace;
+
+  &.bigger {
+    font-size: 18px;
+  }
+}
+
+span {
+  font-size: 16px;
+}
+
+h1 {
+  margin-bottom: 40px;
+  font-size: 50px;
+  color: $font-color;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+
+  &.extra-margin {
+    margin-bottom: 80px;
+  }
+}
+
+h2 {
+  font-size: 32px;
+  font-family: "Oswald", sans-serif;
+  color: $white;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 24px;
+  color: $font-color;
   font-family: "Red Hat Mono", monospace;
 }
 
+section {
+  padding: 3rem 0;
+}
+
 button {
+  position: relative;
   border: none;
   background: transparent;
+
+  img {
+    transition: 0.5s;
+    &:hover {
+      transform: scale(1.1, 1.05);
+    }
+  }
+
+  p {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    color: #818181;
+    font-size: 22px;
+    font-family: "Oswald", sans-serif;
+    pointer-events: none;
+  }
+
+  &.blue-button {
+    p {
+      color: #1a3851;
+    }
+  }
 }
+
+.white {
+  color: $white;
+}
+
+.grey {
+  color: $grey;
+}
+
+.light-blue {
+  color: $light-blue;
+}
+
+.subscribe-modal {
+  .modal-content {
+    position: relative;
+    background: transparent;
+    border: none;
+    img {
+      width: 100%;
+    }
+
+    .content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      padding: 120px 0;
+      
+    }
+  }
+}
+
+// .modal-content {
+//   background: transparent;
+//   border: none;
+// }
