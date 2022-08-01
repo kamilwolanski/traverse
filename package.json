@@ -17,6 +17,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "browser-monads": "^1.0.0",
     "formik": "^2.2.9",
     "gatsby": "^4.19.0",
     "gatsby-background-image": "^1.6.0",

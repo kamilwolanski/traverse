@@ -10,10 +10,10 @@ export const createNewContact = functions.https.onRequest(
       try {
         await axios({
           method: "POST",
-          url: "https://kwolanski3.api-us1.com/api/3/contacts",
+          url: "https://gamerhash.api-us1.com/api/3/contacts",
           headers: {
             "Api-Token":
-              "2ecc01a30cb6510074b041d3b9d56db2f3d28a15df46bdf4dcb210092da1a2cd6cab82f2"
+              "399be13fd9ba0794f0171986451eaa25b352c426c73f773241107ddb564194845dfff1f0"
           },
           data: {
             contact: newContactData

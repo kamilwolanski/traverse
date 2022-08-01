@@ -1,10 +1,16 @@
 p {
-  font-size: 16px;
+  font-size: 12px;
   color: $light-blue;
   font-family: "Red Hat Mono", monospace;
 
+  @include media-breakpoint-up(lg) {
+    font-size: 16px;
+  }
+
   &.bigger {
-    font-size: 18px;
+    @include media-breakpoint-up(lg) {
+      font-size: 18px;
+    }
   }
 }
 
@@ -14,13 +20,19 @@ span {
 
 h1 {
   margin-bottom: 40px;
-  font-size: 50px;
+  font-size: 32px;
   color: $font-color;
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
 
+  @include media-breakpoint-up(lg) {
+    font-size: 50px;
+  }
+
   &.extra-margin {
-    margin-bottom: 80px;
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 80px;
+    }
   }
 }
 
@@ -32,9 +44,15 @@ h2 {
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 16px;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 24px;
+  }
+
   color: $font-color;
-  font-family: "Red Hat Mono", monospace;
+  font-family: "Red Hat Mono",
+  monospace;
 }
 
 section {
@@ -46,8 +64,21 @@ button {
   border: none;
   background: transparent;
 
+  @include media-breakpoint-down(md) {
+    width: 140px;
+
+    img {
+      width: 100%;
+    }
+
+    p {
+      font-size: 18px;
+    }
+  }
+
   img {
     transition: 0.5s;
+
     &:hover {
       transform: scale(1.1, 1.05);
     }
@@ -73,6 +104,32 @@ button {
   }
 }
 
+.z-index-1 {
+  z-index: 1;
+}
+
+#test {
+  width: 150px;
+  height: 32px;
+  border-top-right-radius: 20px;
+  background: #C1C1C1;
+  border-bottom-right-radius: 20px;
+  position: relative;
+  display: inline-block;
+  transform: translateX(-10px);
+
+}
+
+#test:before {
+  background: #181b1f;
+  height: 32px;
+  width: 16px;
+  display: inline-block;
+  content: "";
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
 .white {
   color: $white;
 }
@@ -90,6 +147,7 @@ button {
     position: relative;
     background: transparent;
     border: none;
+
     img {
       width: 100%;
     }
@@ -101,7 +159,7 @@ button {
       top: 0;
       bottom: 0;
       padding: 120px 0;
-      
+
     }
   }
 }

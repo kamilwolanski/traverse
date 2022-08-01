@@ -4,10 +4,10 @@
 
 //core stylesheet
 @import "./variables";
-@import "./typography";
 @import "./form";
 //bootstrap
 @import "~bootstrap/scss/bootstrap";
+@import "./typography";
 
 //page templates
 @import "pageTemplates/traverse";
