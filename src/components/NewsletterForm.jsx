@@ -27,16 +27,14 @@ const NewsletterForm = ({ toggleModal }) => {
 	});
 
 	const handleOnSubmit = values => {
-		console.log("values", values);
 		const options = {
 			method: "POST",
 			data: values,
-			url: "https://us-central1-traverse-serverless.cloudfunctions.net/createNewContact",
+			url: "https://us-central1-traverse-serverless-9959d.cloudfunctions.net/createNewContact",
 		};
 
 		axios(options)
 			.then(response => {
-				console.log("response", response);
 				toggleModal();
 			})
 			.catch(error => {
@@ -63,7 +61,12 @@ const NewsletterForm = ({ toggleModal }) => {
 						<Label className='mt-4'>
 							By filling in this form and clicking “SUBSCRIBE” you give us your consent to process your personal data, provided in
 							this form, to get educational, promotional and sales information in the newsletter format. Please be informed that you
-							can withdraw your consent at any time. To learn more about how we process your personal data, check
+							can withdraw your consent at any time. To learn more about how we process your personal data,
+							<a href='https://gamerhash.com/en/privacy' target='_blank' rel='noreferrer'>
+								{" "}
+								check
+							</a>
+							.
 						</Label>
 						<div className='text-center text-lg-start'>
 							<button className='mt-4 mt-md-5 blue-button'>

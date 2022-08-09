@@ -17,6 +17,10 @@ form {
     font-size: 12px;
     color: $white;
     font-family: "Red Hat Mono", monospace;
+
+    a {
+      color: #5e9fff;
+    }
   }
 
   input {

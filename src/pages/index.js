@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Card, CardBody, Modal } from "reactstrap";
 import { Link as ScrollLink } from "react-scroll";
 import Layout from "../components/Layout";
 import { StaticImage } from "gatsby-plugin-image";
-import { graphql, useStaticQuery } from "gatsby";
-import { getImage } from "gatsby-plugin-image";
-import { convertToBgImage } from "gbimage-bridge";
-import BackgroundImage from "gatsby-background-image";
 import Lottie from "react-lottie-player";
 import lottieBg from "../images/animations/bg - 1.json";
 import Slider from "react-slick";
+import useWindowSize from "../hooks/useWindowSize";
+import useDiscordOnlineUsers from "../hooks/useDiscordOnlineUsers";
 import NewsletterForm from "../components/NewsletterForm";
+import Seo from "../components/seo";
 
-import logoz from "../images/logoz.svg";
-import discord from "../images/social-btns/discord.svg";
-import discordOnline from "../images/social-btns/discord_online.svg";
-import facebook from "../images/social-btns/facebook.svg";
-import telegram from "../images/social-btns/telegram.svg";
-import medium from "../images/social-btns/medium.svg";
-import twitter from "../images/social-btns/twitter.svg";
-import yt from "../images/social-btns/yt.svg";
+import SocialBtn from "../components/SocialBtn";
+import traverseLogo from "../images/traverse-logo.svg";
+import discordBlack from "../images/social-btns-black/discord.svg";
 import hex from "../images/nfts-shape-mobile.svg";
+import hexRed from "../images/nfts-shape-mobile-red.svg";
+import hexSeaBlue from "../images/nfts-shape-mobile-seablue.svg";
 import playBtn from "../images/play-rounded-button.svg";
 import greyButton from "../images/button-stroke.svg";
 import blueButton from "../images/hex-button.svg";
@@ -32,9 +28,15 @@ import bug2 from "../images/bug_voxel.png";
 import logoWhite from "../images/logo-white-stroke.svg";
 import popUpBgc from "../images/popup-glass-shape.svg";
 import heroBgc from "../images/top-bg-shape.svg";
-import heroBgcMobile from "../images/top-bg-shape2-mobile.svg";
-import useWindowSize from "../hooks/useWindowSize";
-import useDiscordOnlineUsers from "../hooks/useDiscordOnlineUsers";
+import heroBgcMobile from "../images/top-bg-shape-mobile.svg";
+import glassShapeBgcMobile from "../images/bg-glass-shape-mobile.svg";
+import glassShapeBgcDesktop from "../images/bg-glass-shape.svg";
+import astro from "../images/astro.png";
+import repsci from "../images/repsci.png";
+import repmin from "../images/repmin.png";
+import gamerhashLogo from "../images/gamerhash_logo.svg";
+import sandboxLogo from "../images/sandbox_logo.svg";
+import x from "../images/x.svg";
 
 const TraversePage = () => {
 	const { width } = useWindowSize();
@@ -43,57 +45,13 @@ const TraversePage = () => {
 	const [isSubscibedModalOpen, setIsSubscribedModalOpen] = useState(false);
 	const [embedUrl, setEmbedUrl] = useState(null);
 
-	const { placeholderImage } = useStaticQuery(
-		graphql`
-			query {
-				placeholderImage: file(relativePath: { eq: "top-bg-shape.png" }) {
-					childImageSharp {
-						gatsbyImageData(layout: FULL_WIDTH, quality: 100)
-					}
-				}
-			}
-		`
-	);
-
-	console.log("width", width);
-	console.log("onlineMembers", onlineUsers);
-	useEffect(() => {
-		const elems = document.getElementsByClassName("slick-slide");
-		Array.from(elems).forEach(v => {
-			// console.log('v', v.childNodes)
-			v.childNodes.forEach((x, index) => {
-				x.addEventListener("mouseover", e => {
-					Array.from(elems).forEach(v => {
-						v.childNodes[index].childNodes.forEach(box => {
-							box.style.transform = "scale(1.03)";
-						});
-					});
-				});
-
-				x.addEventListener("mouseout", e => {
-					console.log("index", index);
-					Array.from(elems).forEach(v => {
-						v.childNodes[index].childNodes.forEach(box => {
-							box.style.transform = "scale(1)";
-						});
-					});
-				});
-			});
-		});
-	}, []);
-	const image = getImage(placeholderImage);
-
-	// Use like this:
-	const bgImage = convertToBgImage(image);
-
 	const settings = {
 		className: "center",
-		centerMode: true,
+		centerMode: false,
 		infinite: true,
 		centerPadding: "60px",
 		slidesToShow: 1,
 		speed: 500,
-		rows: 3,
 		slidesPerRow: 5,
 		focusOnSelect: false,
 		responsive: [
@@ -106,8 +64,7 @@ const TraversePage = () => {
 					centerPadding: "60px",
 					slidesToShow: 1,
 					speed: 500,
-					rows: 3,
-					slidesPerRow: 3,
+					slidesPerRow: 2,
 					focusOnSelect: false,
 				},
 			},
@@ -123,22 +80,49 @@ const TraversePage = () => {
 		}
 	};
 
-	const renderSliderBoxes = () => {
-		const arrayOfBoxes = [];
-		for (let i = 0; i < 3; i++) {
-			for (let j = 1; j <= 15; j++) {
-				arrayOfBoxes.push(
-					<div className='box' onMouseOver={e => handleBox(e)} onMouseOut={e => handleBox(e)}>
-						<div className='wrapper'>
-							<p>{j}</p>
-							<img src={hex} />
-						</div>
-						<h3>{j}</h3>
-					</div>
-				);
+	const renderRow = rowNumber => {
+		const slidesToRender = [];
+
+		const rows = ["first", "second", "third"];
+		const handleHex = () => {
+			if (rowNumber === 1) {
+				return hex;
+			} else if (rowNumber === 2) {
+				return hexRed;
+			} else if (rowNumber === 3) {
+				return hexSeaBlue;
+			} else {
+				return hex;
 			}
+		};
+
+		for (let index = 0; index < 10; index++) {
+			slidesToRender.push(
+				<div
+					className='box'
+					onMouseOver={e => handleBox(e)}
+					onMouseOut={e => handleBox(e)}
+					onFocus={e => handleBox(e)}
+					onBlur={e => handleBox(e)}
+					role='button'
+					tabIndex={0}
+					key={index}>
+					<div className='wrapper'>
+						<StaticImage src='../images/blurred.png' quality={10} alt='' className='slider-asset' />
+						{rowNumber && (
+							<span>
+								{rows[rowNumber - 1]}
+								<br />
+								drop
+							</span>
+						)}
+						<img src={handleHex()} alt='' />
+					</div>
+				</div>
+			);
 		}
-		return arrayOfBoxes;
+
+		return slidesToRender;
 	};
 
 	const toggleSubscribedModal = () => {
@@ -152,21 +136,21 @@ const TraversePage = () => {
 
 	return (
 		<Layout page='traverse'>
+			<Seo />
 			<div className='hero'>
-				<Lottie loop animationData={lottieBg} play />
-				{/* <BackgroundImage Tag="section" {...bgImage} > */}
-				<img src={heroBgc} alt='' className='grey-bgc d-none d-md-block' />
-				<img src={heroBgcMobile} alt='' className='d-md-none w-100' />
-				<div className='zxc'>
+				<Lottie loop animationData={lottieBg} play className='d-none d-lg-block' ale='' />
+				<img src={heroBgc} alt='' className='hero-bgc d-none d-sm-block' />
+				<img src={heroBgcMobile} alt='' className='d-sm-none w-100' />
+				<div className='hero-content-wrapper'>
 					<Container>
 						<Row>
 							<Col className='text-center'>
 								<div className='logo mx-auto'>
-									<img src={logoz} className='w-100' />
+									<img src={traverseLogo} className='w-100' alt='' />
 								</div>
 								<Row className='justify-content-center'>
-									<Col xs={{ size: 11 }} md={{ size: 10, offset: 1 }} xxl={{ size: 6, offset: 3 }}>
-										<p className='mt-3 mt-xxl-5 pt-3 description'>
+									<Col xs={{ size: 11 }} sm={{ size: 12 }} md={{ size: 10 }} xxl={{ size: 6 }}>
+										<p className='mt-3 mt-xxl-5 pt-3 mt-sm-0 pt-sm-0 mt-md-3 description light-blue'>
 											2055. Mankind is being forced to seek for new sources of energetic elements and habitats outside the Earth.
 											The most obvious choice is uninhabited planet - Mars. Experienced space traveller - Astro and his crew are
 											a part of first mission being sent to examine possible location for new colony. What seemed like a simple
@@ -175,13 +159,13 @@ const TraversePage = () => {
 									</Col>
 								</Row>
 								<ScrollLink to='newsletter' smooth={true} duration={600} className='d-md-none'>
-									<button className='mt-5 mb-5 blue-button'>
+									<button className='mt-3 mt-sm-0 mb-5 blue-button'>
 										<img src={blueButton} alt='' />
 										<p>subscribe</p>
 									</button>
 								</ScrollLink>
 								<ScrollLink to='newsletter2' smooth={true} duration={600} className='d-none d-md-block'>
-									<button className='mt-5 mb-5 blue-button'>
+									<button className='mt-4 mt-xl-5 mb-5 blue-button'>
 										<img src={blueButton} alt='' />
 										<p>subscribe</p>
 									</button>
@@ -190,32 +174,23 @@ const TraversePage = () => {
 						</Row>
 					</Container>
 				</div>
-				{/* </BackgroundImage> */}
-				<StaticImage src='../images/astro.png' alt='atro guy' placeholder='tracedSVG' className='astro' />
-				<div className='social-btns'>
-					<a href='https://discord.com/invite/TzbsXdYkjY'>
-						<img src={discord} className='social-btn' />
+				<img src={astro} alt='atro guy' placeholder='tracedSVG' className='astro' />
+				<div className='social-btns z-index-1'>
+					<SocialBtn icon='discord' color='white' />
+					<SocialBtn icon='facebook' color='white' />
+					<SocialBtn icon='telegram' color='white' />
+					<SocialBtn icon='medium' color='white' />
+					<SocialBtn icon='twitter' color='white' />
+				</div>
+				<div className='d-flex common-logo align-items-center justify-content-center'>
+					<a href='https://gamerhash.com/en' target='_blank' rel='noreferrer'>
+						<img src={gamerhashLogo} alt='gamerhash logo' />
 					</a>
-					<a href='https://www.facebook.com/GamerHashApp/'>
-						<img src={facebook} className='social-btn' />
-					</a>
-					<a href='https://t.me/joinchat/KN7AOBQvrP58x619Fyg95A'>
-						<img src={telegram} className='social-btn' />
-					</a>
-					<a href='https://medium.com/we-are-the-gamerhash'>
-						<img src={medium} className='social-btn' />
-					</a>
-					<a href='https://twitter.com/GamerHashCom'>
-						<img src={twitter} className='social-btn' />
+					<img src={x} className='x' alt='x' />
+					<a href='https://www.sandbox.game/en/' target='_blank' rel='noreferrer'>
+						<img src={sandboxLogo} alt='sandbox logo' />
 					</a>
 				</div>
-				<StaticImage
-					src='../images/gamer-hash-sandbox-logo.png'
-					alt='gamer hash and sandbox logo'
-					placeholder='tracedSVG'
-					className='logos'
-					quality={100}
-				/>
 			</div>
 			<hr />
 			<section className='articles'>
@@ -223,43 +198,79 @@ const TraversePage = () => {
 				<Container>
 					<Row className='justify-content-center'>
 						<Col xs={{ size: 12 }} sm='8' md='7' lg='3'>
-							<Card>
-								<CardBody>
-									<StaticImage src='../images/article1.png' alt='Card image cap' placeholder='tracedSVG' quality={100} />
-									<p className='author'>ASTRO’S</p>
-									<h3>Hello World?</h3>
-									<p>
-										This is a wider card with supporting text below as a natural lead-in to additional content. This content is a
-										little bit longer.
-									</p>
-								</CardBody>
-							</Card>
+							<a
+								href='https://sandboxgame.medium.com/gamerhash-partners-with-the-sandbox-to-bring-700-000-gamers-to-the-metaverse-1e72f20c7d52'
+								target='_blank'
+								rel='noreferrer'>
+								<Card>
+									<CardBody>
+										<StaticImage
+											src='../images/articles-imgs/article1.png'
+											alt='Card image cap'
+											placeholder='tracedSVG'
+											quality={100}
+										/>
+										<p className='author'>The Sandbox</p>
+
+										<h3>The first Polish Studio developing in The Sandbox Metaverse!</h3>
+
+										<p>
+											We are happy to announce our new partnership with GamerHash, an ecosystem that allow its users share their
+											computing power by simply running the GamerHash app in the background to receive cryptocurrencies in
+											return!
+										</p>
+									</CardBody>
+								</Card>
+							</a>
 						</Col>
 						<Col xs='12' sm='8' md='7' lg='3' className='mt-4 mt-lg-0'>
-							<Card>
-								<CardBody>
-									<StaticImage src='../images/article2.png' alt='Card image cap' placeholder='tracedSVG' quality={100} />
-									<p className='author'>GAMERHASH</p>
-									<h3>We’ve entered the Metaverse.</h3>
-									<p>
-										This is a wider card with supporting text below as a natural lead-in to additional content. This content is a
-										little bit longer.
-									</p>
-								</CardBody>
-							</Card>
+							<a
+								href='https://medium.com/thesandboxkorea/더-샌드박스-파트너-게이머해시를-소개합니다-6a888ca8605'
+								target='_blank'
+								rel='noreferrer'>
+								<Card>
+									<CardBody>
+										<StaticImage
+											src='../images/articles-imgs/article2.png'
+											alt='Card image cap'
+											placeholder='tracedSVG'
+											quality={100}
+										/>
+										<p className='author'>더 샌드박스 코리아</p>
+
+										<h3>더 샌드박스 파트너 ‘게이머해시’를 소개합니다</h3>
+
+										<p>
+											안녕하세요, 게이머해시 CMO를 맡고 있는 아서 스졸코우스키(Artur Pszczolkowski)입니다. 저는 지난 15년간
+											디지털 산업에 몸담아 왔습니다. 5년 전, 암호화폐를 처음 알게 된 순간부터 이게 바로 제 능력을 발휘해야 할
+											분야라고 생각했죠.
+										</p>
+									</CardBody>
+								</Card>
+							</a>
 						</Col>
 						<Col xs='12' sm='8' md='7' lg='3' className='mt-4 mt-lg-0'>
-							<Card>
-								<CardBody>
-									<StaticImage src='../images/article3.png' alt='Card image cap' placeholder='tracedSVG' quality={100} />
-									<p className='author'>THE SANDBOX</p>
-									<h3>Welcome to the family of builders!</h3>
-									<p>
-										This is a wider card with supporting text below as a natural lead-in to additional content. This content is a
-										little bit longer.
-									</p>
-								</CardBody>
-							</Card>
+							<a href='https://www.binance.com/en/news/top/7127633' target='_blank' rel='noreferrer'>
+								<Card>
+									<CardBody>
+										<StaticImage
+											src='../images/articles-imgs/article3.jpeg'
+											alt='Card image cap'
+											placeholder='tracedSVG'
+											quality={100}
+										/>
+										<p className='author'>Hassan Maishera</p>
+
+										<h3>Binance: The Sandbox partners with GamerHash</h3>
+
+										<p>
+											The Sandbox announced on Tuesday that it has partnered with GamerHash to bring over 700,000 gamers to the
+											metaverse. GamerHash is an ecosystem that allows its users to share their computing power by simply running
+											the GamerHash app in the background to receive cryptocurrencies in return.
+										</p>
+									</CardBody>
+								</Card>
+							</a>
 						</Col>
 					</Row>
 				</Container>
@@ -271,7 +282,7 @@ const TraversePage = () => {
 						<Row>
 							<Col sm={{ size: 10, offset: 1 }} xxl={{ size: 4, offset: 4 }} className='mt-5'>
 								<div className='text-center'>
-									<StaticImage src='../images/logo-white-stroke.png' placeholder='tracedSVG' class='stroke-logo' />
+									<img src={logoWhite} alt='logo white' />
 								</div>
 								<p className='text-center white mt-lg-5 pt-5'>
 									"TRAVERSE. MARS IS MINE" is a free action-adventure game set in the alternative voxel world powered by The
@@ -288,57 +299,76 @@ const TraversePage = () => {
 							<Col lg={{ size: 12 }}>
 								<div className='glass-wrapper text-center'>
 									<div className='glass-content'>
-										<StaticImage src='../images/av-logo.png' placeholder='tracedSVG' className='mt-3 mt-lg-5 logo-white' />
-										<Row>
-											<Col lg={{ size: 8, offset: 2 }}>
-												<h1 className='white mt-4'>mars underground facility</h1>
-											</Col>
-										</Row>
 										<Row className='justify-content-center'>
-											<Col xs='10' lg={{ size: 5 }} className='mx-auto'>
-												<p>
-													Established three thousand years ago under the surface of Mars by group of Reptillian colonizers. In
-													the beginning as a simple mine of the most energetic element - GHXIUM then became one of the most
-													sophisticated research and development facility in Solar system.
-												</p>
-												<p>
-													Currently AV employs over 100.000 Reptillians in the whole Solar system who create cutting edge
-													technologies that are being used on many other planets. From everyday items, through mining
-													equipment, to cloaking devices, facility became a self-sufficient place to live and work for its
-													happy employees. AV provides all basic services, has it's own canteen and a large museum with
-													changeable exhibitions to keep Reptillians entertained. AV takes care of the Earth by secretly
-													providing it with political and community leaders.
-												</p>
-												<p className='pb-5 mb-5'>
-													Want to know more about AV? Please sign up for the tour and get all the news about the facility and
-													its development!
-												</p>
+											<Col xs='12' md={{ size: 12 }} lg='10' className='mx-auto'>
+												<img src={glassShapeBgcMobile} alt='' className='w-100 d-md-none' />
+												<img src={glassShapeBgcDesktop} alt='' className='w-100 d-none d-md-block' />
+												<div className='glass-copy'>
+													<Row className='justify-content-center'>
+														<Col xs='11' lg='8' xl='7' xxl='6' className='mt-3 mt-lg-0 mt-xl-5'>
+															<StaticImage
+																src='../images/av-logo.png'
+																placeholder='tracedSVG'
+																className='logo-white'
+																alt='logo-white'
+															/>
+
+															<h1 className='white mt-4'>mars underground facility</h1>
+
+															<p className='light-blue'>
+																Established three thousand years ago under the surface of Mars by group of Reptillian
+																colonizers. In the beginning as a simple mine of the most energetic element - GHXIUM then
+																became one of the most sophisticated research and development facility in Solar system.
+															</p>
+															<p className='light-blue'>
+																Currently AV employs over 100,000 Reptillians in the whole Solar system who create cutting
+																edge technologies that are being used on many other planets. From everyday items, through
+																mining equipment, to cloaking devices, facility became a self-sufficient place to live and
+																work for its happy employees. AV provides all basic services, has it's own canteen and a
+																large museum with changeable exhibitions to keep Reptillians entertained. AV takes care of
+																the Earth by secretly providing it with political and community leaders.
+															</p>
+															<p className='pb-5 mb-5 light-blue'>
+																Want to know more about AV? Please sign up for the tour and get all the news about the
+																facility and its development!
+															</p>
+														</Col>
+													</Row>
+												</div>
 											</Col>
 										</Row>
 									</div>
 									<StaticImage
 										src='../images/repsec.png'
 										placeholder='tracedSVG'
-										className='d-none d-lg-block repsec'
-										width={270}
+										className='d-none d-sm-block d-md-none d-lg-block repsec'
+										alt='repsec'
 									/>
-									<StaticImage src='../images/map.png' placeholder='tracedSVG' className='map' width={350} />
+
+									<StaticImage
+										src='../images/map.png'
+										placeholder='tracedSVG'
+										className='map d-none d-sm-block'
+										width={350}
+										quality={100}
+										alt='map'
+									/>
 								</div>
 							</Col>
 						</Row>
 					</Container>
-					<Container fluid className='mt-5 mt-lg-0'>
+					<Container className='mt-5 mt-lg-0'>
 						<div className='quarry'>
 							<Row className='justify-content-center'>
-								<Col xs='6' sm='5' xxl={{ size: 6 }} className='d-flex justify-content-center'>
+								<Col xs='6' sm='5' xxl='5' className='d-flex justify-content-center'>
 									<StaticImage src='../images/concept-museum.png' placeholder='tracedSVG' quality={100} />
 								</Col>
 							</Row>
-							<Row className='second-row justify-content-center'>
-								<Col xs='6' sm='5' xxl='6' className='d-flex justify-content-end'>
+							<Row className='second-row justify-content-center mt-2 mt-lg-3 mt-xl-1'>
+								<Col xs='6' sm='5' xxl='5' className='d-flex justify-content-end'>
 									<StaticImage src='../images/quarry-hall.png' placeholder='tracedSVG' className='pr-2' quality={100} />
 								</Col>
-								<Col xs='6' sm='5' xxl='6' className='d-flex justify-content-start'>
+								<Col xs='6' sm='5' xxl='5' className='d-flex justify-content-start'>
 									<div className='quarry-3-wrapper'>
 										<StaticImage src='../images/quarry-3.png' placeholder='tracedSVG' className='pl-2' quality={100} />
 										<h2>
@@ -382,11 +412,11 @@ const TraversePage = () => {
 									</Col>
 								</Row>
 							</div>
-							<Row className='d-none d-lg-flex'>
-								<Col md='4'>
+							<Row className='d-none d-lg-flex justify-content-center'>
+								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
 									<StaticImage src='../images/quarry-hall-museum.png' placeholder='tracedSVG' quality={100} />
 								</Col>
-								<Col md='4'>
+								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
 									<div className='museum-2-wrapper'>
 										<StaticImage src='../images/museum-level2.png' placeholder='tracedSVG' quality={100} />
 										<h2>
@@ -394,7 +424,7 @@ const TraversePage = () => {
 										</h2>
 									</div>
 								</Col>
-								<Col md='4'>
+								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
 									<StaticImage src='../images/quarry-lab_idea.png' placeholder='tracedSVG' quality={100} />
 								</Col>
 							</Row>
@@ -429,10 +459,10 @@ const TraversePage = () => {
 						<Row className='justify-content-center mt-lg-5 pt-lg-5'>
 							<Col xs='6' lg={{ size: 4 }}>
 								<div className='scientis mt-5'>
-									<StaticImage src='../images/lab-b-outside.png' placeholder='tracedSVG' quality={100} />
-									<StaticImage src='../images/repsci.png' placeholder='tracedSVG' quality={100} className='rep rep-scientis' />
+									<StaticImage src='../images/lab-b-outside.png' placeholder='tracedSVG' quality={100} alt='' />
+									<img src={repsci} className='rep rep-scientis' alt='repsci' />
 								</div>
-								<div className='text-center pt-5 mt-5'>
+								<div className='text-center pt-5 mt-2 mt-sm-5'>
 									<h2>scientists</h2>
 									<p className='white mt-3'>
 										Befriend scientists and you will get access to cutting edge technologies that will help you achieve your
@@ -443,9 +473,9 @@ const TraversePage = () => {
 							<Col xs='6' lg={{ size: 4 }}>
 								<div className='miner mt-5'>
 									<StaticImage src='../images/quarry-hiddenPlace-idea-A.png' placeholder='tracedSVG' quality={100} />
-									<StaticImage src='../images/repmin.png' placeholder='tracedSVG' quality={100} className='rep rep-miner' />
+									<img src={repmin} className='rep rep-miner' alt='repmin' />
 								</div>
-								<div className='text-center pt-5 mt-5'>
+								<div className='text-center pt-5 mt-2 mt-sm-5'>
 									<h2>miners</h2>
 									<p className='white mt-3'>
 										Work for miners and they will provide you with sheer manpower that overcomes any obstacle on your way out of
@@ -462,38 +492,38 @@ const TraversePage = () => {
 								<Row className='justify-content-center'>
 									<Col xs='6' sm='5' lg='6' className='d-flex justify-content-start'>
 										<div className='museum-2-wrapper'>
-											<StaticImage src='../images/hall-lobby_new.png' placeholder='tracedSVG' quality={100} />
+											<StaticImage src='../images/hall-lobby_new.png' placeholder='tracedSVG' quality={100} alt='' />
 										</div>
 									</Col>
 								</Row>
-								<Row className='second-row justify-content-center'>
+								<Row className='second-row justify-content-center mt-2 mt-lg-3 mt-xl-1'>
 									<Col xs='6' sm='5' lg='6' className='d-flex justify-content-end'>
 										<div className='labs-1-wrapper'>
-											<StaticImage src='../images/screening.png' placeholder='tracedSVG' quality={100} />
+											<StaticImage src='../images/screening.png' placeholder='tracedSVG' quality={100} alt='' />
 											<h2>
 												labs <br /> level -1
 											</h2>
 										</div>
 									</Col>
 									<Col xs='6' sm='5' lg={{ size: 6 }} className='d-flex justify-content-center'>
-										<StaticImage src='../images/Quarry_Lab_idea-A.png' placeholder='tracedSVG' quality={100} />
+										<StaticImage src='../images/quarry_lab_idea_a.png' placeholder='tracedSVG' quality={100} alt='' />
 									</Col>
 								</Row>
 							</div>
-							<Row className='d-none d-lg-flex'>
-								<Col lg='4'>
-									<StaticImage src='../images/hall-lobby_new.png' placeholder='tracedSVG' quality={100} />
+							<Row className='d-none d-lg-flex justify-content-center'>
+								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
+									<StaticImage src='../images/hall-lobby_new.png' placeholder='tracedSVG' quality={100} alt='' />
 								</Col>
-								<Col lg='4'>
+								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
 									<div className='labs-1-wrapper'>
-										<StaticImage src='../images/screening.png' placeholder='tracedSVG' quality={100} />
+										<StaticImage src='../images/screening.png' placeholder='tracedSVG' quality={100} alt='' />
 										<h2>
 											labs <br /> level -1
 										</h2>
 									</div>
 								</Col>
-								<Col lg='4'>
-									<StaticImage src='../images/Quarry_Lab_idea-A.png' placeholder='tracedSVG' quality={100} />
+								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
+									<StaticImage src='../images/quarry_lab_idea_a.png' placeholder='tracedSVG' quality={100} alt='' />
 								</Col>
 							</Row>
 							<Row className='justify-content-center'>
@@ -510,11 +540,11 @@ const TraversePage = () => {
 					<Container>
 						<Row className='justify-content-center mt-lg-5 pt-5'>
 							<Col xs='6' lg='4'>
-								<StaticImage src='../images/surface.png' placeholder='tracedSVG' quality={100} />
+								<StaticImage src='../images/surface.png' placeholder='tracedSVG' quality={100} alt='' />
 							</Col>
 							<Col xs='6' lg='4'>
 								<div className='surface-0-wrapper'>
-									<StaticImage src='../images/surface2.png' placeholder='tracedSVG' quality={100} />
+									<StaticImage src='../images/surface2.png' placeholder='tracedSVG' quality={100} alt='' />
 									<h2>
 										surface <br /> level -0
 									</h2>
@@ -549,9 +579,15 @@ const TraversePage = () => {
 					</Row>
 				</Container>
 				<Slider {...settings} className='mt-5'>
-					{renderSliderBoxes()}
+					{renderRow(1)}
 				</Slider>
-				<div className='text-center mt-5 d-md-none'>
+				<Slider {...settings} className='mt-0'>
+					{renderRow(2)}
+				</Slider>
+				<Slider {...settings} className='mt-0'>
+					{renderRow(3)}
+				</Slider>
+				<div className='text-center mt-lg-5 d-md-none'>
 					<ScrollLink to='newsletter' smooth={true} duration={300}>
 						<button>
 							<img src={greyButton} alt='stay tuned' />
@@ -559,7 +595,7 @@ const TraversePage = () => {
 						</button>
 					</ScrollLink>
 				</div>
-				<div className='text-center mt-5 d-none d-md-block'>
+				<div className='text-center mt-lg-5 d-none d-md-block'>
 					<ScrollLink to='newsletter2' smooth={true} duration={300}>
 						<button>
 							<img src={greyButton} alt='stay tuned' />
@@ -570,33 +606,65 @@ const TraversePage = () => {
 			</section>
 			<div className='red-section-wrapper'>
 				<section className='red-section'>
-					<div className='v'>
+					<div className='videos'>
 						<Container>
 							<div className='default-skew'>
 								<h1 className='light-blue text-center'>dive into metaverse &amp; nft</h1>
 								<div className='mt-5 pt-4'>
 									<Row className='justify-content-center'>
 										<Col xs='12' sm='8' md='9' lg='4'>
-											<div className='video-wrapper' onClick={() => handleVideo("https://www.youtube.com/embed/ZOQvoptsPiU")}>
-												<StaticImage src='../images/video_1.jpg' />
-												<img className='play-btn' src={playBtn} />
+											<div
+												className='video-wrapper'
+												onClick={() => handleVideo("https://www.youtube.com/embed/ZOQvoptsPiU")}
+												onKeyDown={() => handleVideo("https://www.youtube.com/embed/ZOQvoptsPiU")}
+												role='button'
+												tabIndex={0}>
+												<StaticImage
+													src='../images/youtube-thumbnails/video_1.jpg'
+													alt='video-thumbnail'
+													placeholder='tracedSVG'
+												/>
+												<img className='play-btn' src={playBtn} alt='play' />
 											</div>
 										</Col>
 										<Col xs='12' sm='8' md='9' lg='4' className='mt-4 mt-lg-0'>
-											<div className='video-wrapper' onClick={() => handleVideo("https://www.youtube.com/embed/LpvMYmzwoBg")}>
-												<StaticImage src='../images/video_2.jpg' />
-												<img className='play-btn' src={playBtn} />
+											<div
+												className='video-wrapper'
+												onClick={() => handleVideo("https://www.youtube.com/embed/LpvMYmzwoBg")}
+												onKeyDown={() => handleVideo("https://www.youtube.com/embed/LpvMYmzwoBg")}
+												role='button'
+												tabIndex={0}>
+												<StaticImage
+													src='../images/youtube-thumbnails/video_2.jpg'
+													alt='video-thumbnail'
+													placeholder='tracedSVG'
+												/>
+												<img className='play-btn' src={playBtn} alt='play' />
 											</div>
 										</Col>
 										<Col xs='12' sm='8' md='9' lg='4' className='mt-4 mt-lg-0'>
-											<div className='video-wrapper' onClick={() => handleVideo("https://www.youtube.com/embed/0pL95-KAZfA")}>
-												<StaticImage src='../images/video_3.jpg' />
-												<img className='play-btn' src={playBtn} />
+											<div
+												className='video-wrapper'
+												onClick={() => handleVideo("https://www.youtube.com/embed/0pL95-KAZfA")}
+												onKeyDown={() => handleVideo("https://www.youtube.com/embed/0pL95-KAZfA")}
+												role='button'
+												tabIndex={0}>
+												<StaticImage
+													src='../images/youtube-thumbnails/video_3.jpg'
+													alt='video-thumbnail'
+													placeholder='tracedSVG'
+												/>
+												<img className='play-btn' src={playBtn} alt='play' />
 											</div>
 										</Col>
 									</Row>
 								</div>
-								<p className='text-center white mt-5'>go to full playlist</p>
+								<a
+									href='https://www.youtube.com/watch?v=0pL95-KAZfA&list=PLXxb0QHKZrpmOc8uD8l5Yt1MS_L23Zb_n'
+									target='_blank'
+									rel='noreferrer'>
+									<p className='text-center white mt-5'>go to full playlist</p>
+								</a>
 							</div>
 						</Container>
 						<div className='newsletter overflow-hidden d-lg-none'>
@@ -608,16 +676,16 @@ const TraversePage = () => {
 										</Col>
 									</Row>
 									<div className='section-3d'>
-										<div className='arrows overflow-hidden'>
-											<img src={arrow} />
-											<img src={arrow} />
-											<img src={arrow} />
-											<img src={arrow} />
-											<img src={arrow} />
-											<img src={arrow} />
-											<img src={arrow} />
-											<img src={arrow} />
-											<img src={arrow} />
+										<div className='arrows overflow-hidden d-flex align-items-center h-100'>
+											<img src={arrow} alt='arrow' />
+											<img src={arrow} alt='arrow' />
+											<img src={arrow} alt='arrow' />
+											<img src={arrow} alt='arrow' />
+											<img src={arrow} alt='arrow' />
+											<img src={arrow} alt='arrow' />
+											<img src={arrow} alt='arrow' />
+											<img src={arrow} alt='arrow' />
+											<img src={arrow} alt='arrow' />
 										</div>
 										<Row className='vehicles'>
 											<Col xs='6' lg={{ size: 3, offset: 2 }} className='text-center text-lg-left'>
@@ -633,7 +701,7 @@ const TraversePage = () => {
 									</div>
 								</Container>
 								<div className='bottom-bgc'>
-									<img src={bgc} className='w-100' />
+									<img src={bgc} className='w-100' alt='' />
 									<img src={bug1} className='bug bug-1' alt='' />
 									<img src={bug2} className='bug bug-2' alt='' />
 								</div>
@@ -646,22 +714,22 @@ const TraversePage = () => {
 								<h1 className='text-center light-blue'>turning concepts into metaverse assets</h1>
 								<div className='section-3d'>
 									<div className='arrows overflow-hidden'>
-										<img src={arrow} />
-										<img src={arrow} />
-										<img src={arrow} />
-										<img src={arrow} />
-										<img src={arrow} />
-										<img src={arrow} />
-										<img src={arrow} />
-										<img src={arrow} />
-										<img src={arrow} />
+										<img src={arrow} alt='' />
+										<img src={arrow} alt='' />
+										<img src={arrow} alt='' />
+										<img src={arrow} alt='' />
+										<img src={arrow} alt='' />
+										<img src={arrow} alt='' />
+										<img src={arrow} alt='' />
+										<img src={arrow} alt='' />
+										<img src={arrow} alt='' />
 									</div>
 									<Row className='vehicles'>
 										<Col xs='6' lg={{ size: 3, offset: 2 }}>
-											<StaticImage src='../images/vehicle_1.png' alt='' className='vehicle' />
+											<StaticImage src='../images/vehicle_1.png' alt='vehicle' className='vehicle' placeholder='tracedSVG' />
 										</Col>
 										<Col xs='6' lg={{ size: 3, offset: 2 }}>
-											<StaticImage src='../images/vehicle_2.png' alt='' className='vehicle' />
+											<StaticImage src='../images/vehicle_2.png' alt='vehicle' className='vehicle' placeholder='tracedSVG' />
 										</Col>
 									</Row>
 								</div>
@@ -670,24 +738,30 @@ const TraversePage = () => {
 								</div>
 							</Container>
 							<div className='bottom-bgc'>
-								<img src={bgc} className='w-100' />
+								<img src={bgc} className='w-100' alt='' />
 								<img src={bug1} className='bug bug-1' alt='' />
 								<img src={bug2} className='bug bug-2' alt='' />
-								<img src={logoWhite} className='logo-white' />
+								<img src={logoWhite} className='logo-white' alt='logo' />
 							</div>
 						</div>
 					</div>
 				</section>
 				<hr />
 			</div>
-			<section className='black'>
+			<section className='metaverse-lands-section'>
 				<div className='wrapper'>
 					<Container>
-						<Row>
+						<Row className='justify-content-center'>
 							<h1 className='text-center white'>the journey has just begun...</h1>
-							<Col md={{ size: 6, offset: 3 }} xxl={{ size: 8, offset: 2 }}>
+							<Col md={{ size: 6 }} xxl={{ size: 7 }}>
 								<div className='text-center'>
-									<StaticImage src='../images/metaverse_lands.png' quality={100} alt='' className='metaverse-lands' />
+									<StaticImage
+										src='../images/metaverse_lands.png'
+										quality={100}
+										alt=''
+										placeholder='tracedSVG'
+										className='metaverse-lands w-100'
+									/>
 								</div>
 							</Col>
 						</Row>
@@ -700,14 +774,17 @@ const TraversePage = () => {
 							</Col>
 						</Row>
 						<Row>
-							<Col>
+							<Col xs='12'>
 								<div className='text-center mt-5'>
-									<StaticImage
-										src='../images/gamer-hash-sandbox-logo.png'
-										alt='gamer hash and sandbox logo'
-										placeholder='tracedSVG'
-										quality={100}
-									/>
+									<div className='d-flex logo-bottom align-items-center justify-content-center'>
+										<a href='https://gamerhash.com/en' target='_blank' rel='noreferrer'>
+											<img src={gamerhashLogo} alt='gamerhash logo' />
+										</a>
+										<img src={x} className='x' alt='x' />
+										<a href='https://www.sandbox.game/en/' target='_blank' rel='noreferrer'>
+											<img src={sandboxLogo} alt='sandbox logo' />
+										</a>
+									</div>
 								</div>
 							</Col>
 						</Row>
@@ -716,57 +793,43 @@ const TraversePage = () => {
 				<hr className='mt-5' />
 			</section>
 			<footer className='d-none d-lg-block'>
-				<Container className='d-flex justify-content-between align-items-end h-100'>
-					<div></div>
+				<Container className='d-flex justify-content-between justify-content-xxl-end align-items-end h-100'>
+					<div className='d-xxl-none'>
+						<p className='bigger'>© 2022 CoinAxe sp. z o.o.</p>
+					</div>
 					<div className='z-index-1'>
 						<div className='social-btns mb-2'>
-							<a href='https://www.facebook.com/GamerHashApp/' className='mx-2 d-inline-flex'>
-								<img src={facebook} className='social-btn' />
-							</a>
-							<a href='https://www.youtube.com/channel/UCv6axnIN6jczLcLraH4cK6g' className='mx-2 d-inline-flex'>
-								<img src={yt} className='social-btn' />
-							</a>
-							<a href='https://medium.com/we-are-the-gamerhash' className='mx-2 d-inline-flex'>
-								<img src={medium} className='social-btn' />
-							</a>
-							<a href='https://twitter.com/GamerHashCom' className='mx-2 d-inline-flex'>
-								<img src={twitter} className='social-btn' />
-							</a>
-							<a href='https://t.me/joinchat/KN7AOBQvrP58x619Fyg95A' className='mx-2 d-inline-flex'>
-								<img src={discord} className='social-btn z-index-1' />
-								<div id='test'>
+							<SocialBtn icon='facebook' color='black' classes={["mx-2", "d-inline-flex"]} />
+							<SocialBtn icon='youtube' color='black' classes={["mx-2", "d-inline-flex"]} />
+							<SocialBtn icon='medium' color='black' classes={["mx-2", "d-inline-flex"]} />
+							<SocialBtn icon='twitter' color='black' classes={["mx-2", "d-inline-flex"]} />
+
+							<a href='https://discord.com/invite/TzbsXdYkjY' className='mx-2 d-inline-flex'>
+								<img src={discordBlack} className='social-btn z-index-1 discord' alt='discord' />
+								<div className='online-users-discord'>
 									<p>ONLINE:{onlineUsers}</p>
 								</div>
 							</a>
 						</div>
 					</div>
 				</Container>
-				<div className='copyright'>
+				<div className='copyright d-none d-xxl-block'>
 					<p className='bigger'>© 2022 CoinAxe sp. z o.o.</p>
 				</div>
 			</footer>
 			<footer className='d-lg-none d-flex align-items-end'>
 				<Container className='d-flex flex-column align-items-center'>
-					<div></div>
 					<div className='z-index-1'>
 						<div className='social-btns mb-2'>
-							<a href='https://www.facebook.com/GamerHashApp/' className='mx-2 d-inline-flex'>
-								<img src={facebook} className='social-btn' />
-							</a>
-							<a href='https://www.youtube.com/channel/UCv6axnIN6jczLcLraH4cK6g' className='mx-2 d-inline-flex'>
-								<img src={yt} className='social-btn' />
-							</a>
-							<a href='https://medium.com/we-are-the-gamerhash' className='mx-2 d-inline-flex'>
-								<img src={medium} className='social-btn' />
-							</a>
-							<a href='https://twitter.com/GamerHashCom' className='mx-2 d-inline-flex'>
-								<img src={twitter} className='social-btn' /> 
-							</a>
-							<a href='https://t.me/joinchat/KN7AOBQvrP58x619Fyg95A' className='mx-2 d-inline-flex'>
-								<img src={discord} className='social-btn z-index-1' />
-								<div id='test'>
-								<p>ONLINE:{onlineUsers}</p>
-									
+							<SocialBtn icon='facebook' color='black' classes={["mx-1", "mx-lg-2", "d-inline-flex"]} />
+							<SocialBtn icon='youtube' color='black' classes={["mx-1", "mx-lg-2", "d-inline-flex"]} />
+							<SocialBtn icon='medium' color='black' classes={["mx-1", "mx-lg-2", "d-inline-flex"]} />
+							<SocialBtn icon='twitter' color='black' classes={["mx-1", "mx-lg-2", "d-inline-flex"]} />
+
+							<a href='https://discord.com/invite/TzbsXdYkjY' className='mx-1 mx-lg-2 d-inline-flex'>
+								<img src={discordBlack} className='social-btn z-index-1 discord' alt='discord' />
+								<div className='online-users-discord'>
+									<p>ONLINE:{onlineUsers}</p>
 								</div>
 							</a>
 						</div>
@@ -796,7 +859,7 @@ const TraversePage = () => {
 							<Row>
 								<Col>
 									<h1 className='text-center white'>confirmation sent</h1>
-									<p className='text-center mt-4'>Check your mailbox and confirm your subscription.</p>
+									<p className='text-center mt-4 light-blue'>Check your mailbox and confirm your subscription.</p>
 									<div className='text-center mt-5'>
 										<button className='mt-5 mb-5 blue-button' onClick={toggleSubscribedModal}>
 											<img src={blueButton} alt='' />

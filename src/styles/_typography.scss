@@ -1,6 +1,6 @@
 p {
   font-size: 12px;
-  color: $light-blue;
+  color: $font-color;
   font-family: "Red Hat Mono", monospace;
 
   @include media-breakpoint-up(lg) {
@@ -55,6 +55,10 @@ h3 {
   monospace;
 }
 
+a {
+  text-decoration: none;
+}
+
 section {
   padding: 3rem 0;
 }
@@ -64,15 +68,19 @@ button {
   border: none;
   background: transparent;
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(lg) {
     width: 140px;
 
     img {
       width: 100%;
     }
+  }
 
-    p {
-      font-size: 18px;
+  @include media-breakpoint-down(xl) {
+    width: 150px;
+
+    img {
+      width: 100%;
     }
   }
 
@@ -92,10 +100,17 @@ button {
     transform: translate(-50%, -50%);
     text-transform: uppercase;
     color: #818181;
-    font-size: 22px;
+    font-size: 16px;
     font-family: "Oswald", sans-serif;
     pointer-events: none;
+    font-weight: 500;
+
+    @include media-breakpoint-up(xl) {
+      font-size: 22px;
+    }
   }
+
+
 
   &.blue-button {
     p {
@@ -104,42 +119,52 @@ button {
   }
 }
 
+.social-btns {
+  img {
+    border-radius: 50%;
+    background-color: $bgcSocial;
+    padding: 1px;
+    transition: 0.2s;
+    width: 24px;
+
+    @include media-breakpoint-up(lg) {
+      width: initial;
+    }
+
+    &.discord:hover {
+      background-color: $discordColor;
+    }
+
+    &.facebook:hover {
+      background-color: $facebookColor;
+    }
+
+    &.telegram:hover {
+      background-color: $telegramColor;
+    }
+
+    &.medium:hover {
+      background-color: $mediumColor;
+    }
+
+    &.twitter:hover {
+      background-color: $twitterColor;
+    }
+
+    &.youtube:hover {
+      background-color: #FF0000;
+    }
+  }
+}
+
 .z-index-1 {
   z-index: 1;
 }
 
-#test {
-  width: 150px;
-  height: 32px;
-  border-top-right-radius: 20px;
-  background: #C1C1C1;
-  border-bottom-right-radius: 20px;
-  position: relative;
-  display: inline-block;
-  transform: translateX(-10px);
-
-}
-
-#test:before {
-  background: #181b1f;
-  height: 32px;
-  width: 16px;
-  display: inline-block;
-  content: "";
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
-
-.white {
-  color: $white;
-}
-
-.grey {
-  color: $grey;
-}
-
-.light-blue {
-  color: $light-blue;
+.col-xxxl-3 {
+  @media only screen and (min-width: 2000px) {
+    width: 25% !important;
+  }
 }
 
 .subscribe-modal {
@@ -164,7 +189,15 @@ button {
   }
 }
 
-// .modal-content {
-//   background: transparent;
-//   border: none;
-// }
+
+.white {
+  color: $white;
+}
+
+.grey {
+  color: $grey;
+}
+
+.light-blue {
+  color: $light-blue;
+}
