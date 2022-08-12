@@ -46,7 +46,7 @@ const TraversePage = () => {
 				<Container fluid>
 					<Row>
 						<Col xs={{ size: 4, offset: 8 }} className='p-0'>
-							<StaticImage src='../../images/quarry.png' alt='quarry' quality={100} />
+							<StaticImage src='../../images/quarry.png' alt='quarry' quality={100} placeholder='tracedSVG'/>
 						</Col>
 					</Row>
 				</Container>
@@ -85,7 +85,7 @@ const TraversePage = () => {
 				<Container fluid>
 					<Row>
 						<Col xs={{ size: 4 }} className='p-0'>
-							<StaticImage src='../../images/museum.png' alt='museum' quality={100} />
+							<StaticImage src='../../images/museum.png' alt='museum' quality={100} placeholder='tracedSVG'/>
 						</Col>
 					</Row>
 				</Container>
@@ -94,12 +94,12 @@ const TraversePage = () => {
 			<section className='d-md-none'>
 				<Row>
 					<Col xs='8'>
-						<StaticImage src='../../images/museum.png' alt='museum' quality={100} />
+						<StaticImage src='../../images/museum.png' alt='museum' quality={100} placeholder='tracedSVG'/>
 					</Col>
 				</Row>
 				<Row>
 					<Col xs={{ size: 8, offset: 4 }}>
-						<StaticImage src='../../images/quarry.png' alt='quarry' quality={100} />
+						<StaticImage src='../../images/quarry.png' alt='quarry' quality={100} placeholder='tracedSVG'/>
 					</Col>
 				</Row>
 			</section>
