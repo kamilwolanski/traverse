@@ -2,41 +2,41 @@ import React, { useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Card, CardBody, Modal } from "reactstrap";
 import { Link as ScrollLink } from "react-scroll";
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout";
 import { StaticImage } from "gatsby-plugin-image";
 import Lottie from "react-lottie-player";
-import lottieBg from "../images/animations/bg - 1.json";
+import lottieBg from "../../images/animations/bg - 1.json";
 import Slider from "react-slick";
-import useWindowSize from "../hooks/useWindowSize";
-import useDiscordOnlineUsers from "../hooks/useDiscordOnlineUsers";
-import NewsletterForm from "../components/NewsletterForm";
-import Seo from "../components/seo";
+import useWindowSize from "../../hooks/useWindowSize";
+import useDiscordOnlineUsers from "../../hooks/useDiscordOnlineUsers";
+import NewsletterForm from "../../components/NewsletterForm";
+import Seo from "../../components/seo";
 
-import SocialBtn from "../components/SocialBtn";
-import traverseLogo from "../images/traverse-logo.svg";
-import discordBlack from "../images/social-btns-black/discord.svg";
-import hex from "../images/nfts-shape-mobile.svg";
-import hexRed from "../images/nfts-shape-mobile-red.svg";
-import hexSeaBlue from "../images/nfts-shape-mobile-seablue.svg";
-import playBtn from "../images/play-rounded-button.svg";
-import greyButton from "../images/button-stroke.svg";
-import blueButton from "../images/hex-button.svg";
-import bgc from "../images/bg.png";
-import arrow from "../images/arrow.svg";
-import bug1 from "../images/bug_concept.png";
-import bug2 from "../images/bug_voxel.png";
-import logoWhite from "../images/logo-white-stroke.svg";
-import popUpBgc from "../images/popup-glass-shape.svg";
-import heroBgc from "../images/top-bg-shape.svg";
-import heroBgcMobile from "../images/top-bg-shape-mobile.svg";
-import glassShapeBgcMobile from "../images/bg-glass-shape-mobile.svg";
-import glassShapeBgcDesktop from "../images/bg-glass-shape.svg";
-import astro from "../images/astro.png";
-import repsci from "../images/repsci.png";
-import repmin from "../images/repmin.png";
-import gamerhashLogo from "../images/gamerhash_logo.svg";
-import sandboxLogo from "../images/sandbox_logo.svg";
-import x from "../images/x.svg";
+import SocialBtn from "../../components/SocialBtn";
+import traverseLogo from "../../images/traverse-logo.svg";
+import discordBlack from "../../images/social-btns-black/discord.svg";
+import hex from "../../images/nfts-shape-mobile.svg";
+import hexRed from "../../images/nfts-shape-mobile-red.svg";
+import hexSeaBlue from "../../images/nfts-shape-mobile-seablue.svg";
+import playBtn from "../../images/play-rounded-button.svg";
+import greyButton from "../../images/button-stroke.svg";
+import blueButton from "../../images/hex-button.svg";
+import bgc from "../../images/bg.png";
+import arrow from "../../images/arrow.svg";
+import bug1 from "../../images/bug_concept.png";
+import bug2 from "../../images/bug_voxel.png";
+import logoWhite from "../../images/logo-white-stroke.svg";
+import popUpBgc from "../../images/popup-glass-shape.svg";
+import heroBgc from "../../images/top-bg-shape.svg";
+import heroBgcMobile from "../../images/top-bg-shape-mobile.svg";
+import glassShapeBgcMobile from "../../images/bg-glass-shape-mobile.svg";
+import glassShapeBgcDesktop from "../../images/bg-glass-shape.svg";
+import astro from "../../images/astro.png";
+import repsci from "../../images/repsci.png";
+import repmin from "../../images/repmin.png";
+import gamerhashLogo from "../../images/gamerhash_logo.svg";
+import sandboxLogo from "../../images/sandbox_logo.svg";
+import x from "../../images/x.svg";
 
 const TraversePage = () => {
 	const { width } = useWindowSize();
@@ -108,7 +108,7 @@ const TraversePage = () => {
 					tabIndex={0}
 					key={index}>
 					<div className='wrapper'>
-						<StaticImage src='../images/blurred.png' quality={10} alt='' className='slider-asset' />
+						<StaticImage src='../../images/blurred.png' quality={10} alt='' className='slider-asset' />
 						{rowNumber && (
 							<span>
 								{rows[rowNumber - 1]}
@@ -205,7 +205,7 @@ const TraversePage = () => {
 								<Card>
 									<CardBody>
 										<StaticImage
-											src='../images/articles-imgs/article1.png'
+											src='../../images/articles-imgs/article1.png'
 											alt='Card image cap'
 											placeholder='tracedSVG'
 											quality={100}
@@ -231,7 +231,7 @@ const TraversePage = () => {
 								<Card>
 									<CardBody>
 										<StaticImage
-											src='../images/articles-imgs/article2.png'
+											src='../../images/articles-imgs/article2.png'
 											alt='Card image cap'
 											placeholder='tracedSVG'
 											quality={100}
@@ -254,7 +254,7 @@ const TraversePage = () => {
 								<Card>
 									<CardBody>
 										<StaticImage
-											src='../images/articles-imgs/article3.jpeg'
+											src='../../images/articles-imgs/article3.jpeg'
 											alt='Card image cap'
 											placeholder='tracedSVG'
 											quality={100}
@@ -307,7 +307,7 @@ const TraversePage = () => {
 													<Row className='justify-content-center'>
 														<Col xs='11' lg='8' xl='7' xxl='6' className='mt-3 mt-lg-0 mt-xl-5'>
 															<StaticImage
-																src='../images/av-logo.png'
+																src='../../images/av-logo.png'
 																placeholder='tracedSVG'
 																className='logo-white'
 																alt='logo-white'
@@ -339,14 +339,14 @@ const TraversePage = () => {
 										</Row>
 									</div>
 									<StaticImage
-										src='../images/repsec.png'
+										src='../../images/repsec.png'
 										placeholder='tracedSVG'
 										className='d-none d-sm-block d-md-none d-lg-block repsec'
 										alt='repsec'
 									/>
 
 									<StaticImage
-										src='../images/map.png'
+										src='../../images/map.png'
 										placeholder='tracedSVG'
 										className='map d-none d-sm-block'
 										width={350}
@@ -361,16 +361,16 @@ const TraversePage = () => {
 						<div className='quarry'>
 							<Row className='justify-content-center'>
 								<Col xs='6' sm='5' xxl='5' className='d-flex justify-content-center'>
-									<StaticImage src='../images/concept-museum.png' placeholder='tracedSVG' quality={100} />
+									<StaticImage src='../../images/concept-museum.png' placeholder='tracedSVG' quality={100} />
 								</Col>
 							</Row>
 							<Row className='second-row justify-content-center mt-2 mt-lg-3 mt-xl-1'>
 								<Col xs='6' sm='5' xxl='5' className='d-flex justify-content-end'>
-									<StaticImage src='../images/quarry-hall.png' placeholder='tracedSVG' className='pr-2' quality={100} />
+									<StaticImage src='../../images/quarry-hall.png' placeholder='tracedSVG' className='pr-2' quality={100} />
 								</Col>
 								<Col xs='6' sm='5' xxl='5' className='d-flex justify-content-start'>
 									<div className='quarry-3-wrapper'>
-										<StaticImage src='../images/quarry-3.png' placeholder='tracedSVG' className='pl-2' quality={100} />
+										<StaticImage src='../../images/quarry-3.png' placeholder='tracedSVG' className='pl-2' quality={100} />
 										<h2>
 											quarry <br /> level -3
 										</h2>
@@ -394,7 +394,7 @@ const TraversePage = () => {
 								<Row className='second-row justify-content-center'>
 									<Col xs='6' sm='5' lg='6' className='d-flex justify-content-end'>
 										<div className='museum-2-wrapper'>
-											<StaticImage src='../images/museum-level2.png' placeholder='tracedSVG' className='pr-2' quality={100} />
+											<StaticImage src='../../images/museum-level2.png' placeholder='tracedSVG' className='pr-2' quality={100} />
 											<h2>
 												museum <br /> level -2
 											</h2>
@@ -402,30 +402,30 @@ const TraversePage = () => {
 									</Col>
 									<Col xs='6' sm='5' lg='6' className='d-flex justify-content-start'>
 										<div className='museum-2-wrapper'>
-											<StaticImage src='../images/quarry-hall-museum.png' placeholder='tracedSVG' quality={100} />
+											<StaticImage src='../../images/quarry-hall-museum.png' placeholder='tracedSVG' quality={100} />
 										</div>
 									</Col>
 								</Row>
 								<Row className='justify-content-center'>
 									<Col xs='6' sm='5' lg={{ size: 6 }} className='d-flex justify-content-center'>
-										<StaticImage src='../images/quarry-lab_idea.png' placeholder='tracedSVG' className='pl-2' quality={100} />
+										<StaticImage src='../../images/quarry-lab_idea.png' placeholder='tracedSVG' className='pl-2' quality={100} />
 									</Col>
 								</Row>
 							</div>
 							<Row className='d-none d-lg-flex justify-content-center'>
 								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
-									<StaticImage src='../images/quarry-hall-museum.png' placeholder='tracedSVG' quality={100} />
+									<StaticImage src='../../images/quarry-hall-museum.png' placeholder='tracedSVG' quality={100} />
 								</Col>
 								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
 									<div className='museum-2-wrapper'>
-										<StaticImage src='../images/museum-level2.png' placeholder='tracedSVG' quality={100} />
+										<StaticImage src='../../images/museum-level2.png' placeholder='tracedSVG' quality={100} />
 										<h2>
 											museum <br /> level -2
 										</h2>
 									</div>
 								</Col>
 								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
-									<StaticImage src='../images/quarry-lab_idea.png' placeholder='tracedSVG' quality={100} />
+									<StaticImage src='../../images/quarry-lab_idea.png' placeholder='tracedSVG' quality={100} />
 								</Col>
 							</Row>
 							<Row>
@@ -459,7 +459,7 @@ const TraversePage = () => {
 						<Row className='justify-content-center mt-lg-5 pt-lg-5'>
 							<Col xs='6' lg={{ size: 4 }}>
 								<div className='scientis mt-5'>
-									<StaticImage src='../images/lab-b-outside.png' placeholder='tracedSVG' quality={100} alt='' />
+									<StaticImage src='../../images/lab-b-outside.png' placeholder='tracedSVG' quality={100} alt='' />
 									<img src={repsci} className='rep rep-scientis' alt='repsci' />
 								</div>
 								<div className='text-center pt-5 mt-2 mt-sm-5'>
@@ -472,7 +472,7 @@ const TraversePage = () => {
 							</Col>
 							<Col xs='6' lg={{ size: 4 }}>
 								<div className='miner mt-5'>
-									<StaticImage src='../images/quarry-hiddenPlace-idea-A.png' placeholder='tracedSVG' quality={100} />
+									<StaticImage src='../../images/quarry-hiddenPlace-idea-A.png' placeholder='tracedSVG' quality={100} />
 									<img src={repmin} className='rep rep-miner' alt='repmin' />
 								</div>
 								<div className='text-center pt-5 mt-2 mt-sm-5'>
@@ -492,38 +492,38 @@ const TraversePage = () => {
 								<Row className='justify-content-center'>
 									<Col xs='6' sm='5' lg='6' className='d-flex justify-content-start'>
 										<div className='museum-2-wrapper'>
-											<StaticImage src='../images/hall-lobby_new.png' placeholder='tracedSVG' quality={100} alt='' />
+											<StaticImage src='../../images/hall-lobby_new.png' placeholder='tracedSVG' quality={100} alt='' />
 										</div>
 									</Col>
 								</Row>
 								<Row className='second-row justify-content-center mt-2 mt-lg-3 mt-xl-1'>
 									<Col xs='6' sm='5' lg='6' className='d-flex justify-content-end'>
 										<div className='labs-1-wrapper'>
-											<StaticImage src='../images/screening.png' placeholder='tracedSVG' quality={100} alt='' />
+											<StaticImage src='../../images/screening.png' placeholder='tracedSVG' quality={100} alt='' />
 											<h2>
 												labs <br /> level -1
 											</h2>
 										</div>
 									</Col>
 									<Col xs='6' sm='5' lg={{ size: 6 }} className='d-flex justify-content-center'>
-										<StaticImage src='../images/quarry_lab_idea_a.png' placeholder='tracedSVG' quality={100} alt='' />
+										<StaticImage src='../../images/quarry_lab_idea_a.png' placeholder='tracedSVG' quality={100} alt='' />
 									</Col>
 								</Row>
 							</div>
 							<Row className='d-none d-lg-flex justify-content-center'>
 								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
-									<StaticImage src='../images/hall-lobby_new.png' placeholder='tracedSVG' quality={100} alt='' />
+									<StaticImage src='../../images/hall-lobby_new.png' placeholder='tracedSVG' quality={100} alt='' />
 								</Col>
 								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
 									<div className='labs-1-wrapper'>
-										<StaticImage src='../images/screening.png' placeholder='tracedSVG' quality={100} alt='' />
+										<StaticImage src='../../images/screening.png' placeholder='tracedSVG' quality={100} alt='' />
 										<h2>
 											labs <br /> level -1
 										</h2>
 									</div>
 								</Col>
 								<Col widths={["md", "xxxl"]} md='4' xxxl='3'>
-									<StaticImage src='../images/quarry_lab_idea_a.png' placeholder='tracedSVG' quality={100} alt='' />
+									<StaticImage src='../../images/quarry_lab_idea_a.png' placeholder='tracedSVG' quality={100} alt='' />
 								</Col>
 							</Row>
 							<Row className='justify-content-center'>
@@ -540,11 +540,11 @@ const TraversePage = () => {
 					<Container>
 						<Row className='justify-content-center mt-lg-5 pt-5'>
 							<Col xs='6' lg='4'>
-								<StaticImage src='../images/surface.png' placeholder='tracedSVG' quality={100} alt='' />
+								<StaticImage src='../../images/surface.png' placeholder='tracedSVG' quality={100} alt='' />
 							</Col>
 							<Col xs='6' lg='4'>
 								<div className='surface-0-wrapper'>
-									<StaticImage src='../images/surface2.png' placeholder='tracedSVG' quality={100} alt='' />
+									<StaticImage src='../../images/surface2.png' placeholder='tracedSVG' quality={100} alt='' />
 									<h2>
 										surface <br /> level -0
 									</h2>
@@ -620,7 +620,7 @@ const TraversePage = () => {
 												role='button'
 												tabIndex={0}>
 												<StaticImage
-													src='../images/youtube-thumbnails/video_1.jpg'
+													src='../../images/youtube-thumbnails/video_1.jpg'
 													alt='video-thumbnail'
 													placeholder='tracedSVG'
 												/>
@@ -635,7 +635,7 @@ const TraversePage = () => {
 												role='button'
 												tabIndex={0}>
 												<StaticImage
-													src='../images/youtube-thumbnails/video_2.jpg'
+													src='../../images/youtube-thumbnails/video_2.jpg'
 													alt='video-thumbnail'
 													placeholder='tracedSVG'
 												/>
@@ -650,7 +650,7 @@ const TraversePage = () => {
 												role='button'
 												tabIndex={0}>
 												<StaticImage
-													src='../images/youtube-thumbnails/video_3.jpg'
+													src='../../images/youtube-thumbnails/video_3.jpg'
 													alt='video-thumbnail'
 													placeholder='tracedSVG'
 												/>
@@ -689,10 +689,10 @@ const TraversePage = () => {
 										</div>
 										<Row className='vehicles'>
 											<Col xs='6' lg={{ size: 3, offset: 2 }} className='text-center text-lg-left'>
-												<StaticImage src='../images/vehicle_1.png' alt='' className='vehicle' placeholder='tracedSVG' />
+												<StaticImage src='../../images/vehicle_1.png' alt='' className='vehicle' placeholder='tracedSVG' />
 											</Col>
 											<Col xs='6' lg={{ size: 3, offset: 2 }} className='text-center text-lg-left'>
-												<StaticImage src='../images/vehicle_2.png' alt='' className='vehicle' placeholder='tracedSVG' />
+												<StaticImage src='../../images/vehicle_2.png' alt='' className='vehicle' placeholder='tracedSVG' />
 											</Col>
 										</Row>
 									</div>
@@ -726,10 +726,10 @@ const TraversePage = () => {
 									</div>
 									<Row className='vehicles'>
 										<Col xs='6' lg={{ size: 3, offset: 2 }}>
-											<StaticImage src='../images/vehicle_1.png' alt='vehicle' className='vehicle' placeholder='tracedSVG' />
+											<StaticImage src='../../images/vehicle_1.png' alt='vehicle' className='vehicle' placeholder='tracedSVG' />
 										</Col>
 										<Col xs='6' lg={{ size: 3, offset: 2 }}>
-											<StaticImage src='../images/vehicle_2.png' alt='vehicle' className='vehicle' placeholder='tracedSVG' />
+											<StaticImage src='../../images/vehicle_2.png' alt='vehicle' className='vehicle' placeholder='tracedSVG' />
 										</Col>
 									</Row>
 								</div>
@@ -756,7 +756,7 @@ const TraversePage = () => {
 							<Col md={{ size: 6 }} xxl={{ size: 7 }}>
 								<div className='text-center'>
 									<StaticImage
-										src='../images/metaverse_lands.png'
+										src='../../images/metaverse_lands.png'
 										quality={100}
 										alt=''
 										placeholder='tracedSVG'
