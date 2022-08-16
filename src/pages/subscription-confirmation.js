@@ -1,18 +1,18 @@
 import React from "react";
 import { navigate } from "gatsby";
 import { Container, Row, Col } from "reactstrap";
-import Layout from "../../components/Layout";
+import Layout from "../components/Layout";
 import { StaticImage } from "gatsby-plugin-image";
-import useDiscordOnlineUsers from "../../hooks/useDiscordOnlineUsers";
-import Seo from "../../components/seo";
+import useDiscordOnlineUsers from "../hooks/useDiscordOnlineUsers";
+import Seo from "../components/seo";
 
-import SocialBtn from "../../components/SocialBtn";
-import discordBlack from "../../images/social-btns-black/discord.svg";
-import blueButton from "../../images/hex-button.svg";
-import logoWhite from "../../images/logo-white-stroke.svg";
-import gamerhashLogoWhite from "../../images/gamerhash_logo_white.svg";
-import sandboxLogoWhite from "../../images/sandbox_logo_white.svg";
-import x from "../../images/x_white.svg";
+import SocialBtn from "../components/SocialBtn";
+import discordBlack from "../images/social-btns-black/discord.svg";
+import blueButton from "../images/hex-button.svg";
+import logoWhite from "../images/logo-white-stroke.svg";
+import gamerhashLogoWhite from "../images/gamerhash_logo_white.svg";
+import sandboxLogoWhite from "../images/sandbox_logo_white.svg";
+import x from "../images/x_white.svg";
 
 const TraversePage = () => {
 	const onlineUsers = useDiscordOnlineUsers("https://discord.com/api/guilds/400320103830388736/widget.json");
@@ -46,12 +46,12 @@ const TraversePage = () => {
 				<Container fluid>
 					<Row>
 						<Col xs={{ size: 4, offset: 8 }} className='p-0'>
-							<StaticImage src='../../images/quarry.png' alt='quarry' quality={100} placeholder='tracedSVG'/>
+							<StaticImage src='../images/quarry.png' alt='quarry' quality={100} placeholder='tracedSVG'/>
 						</Col>
 					</Row>
 				</Container>
 			</section>
-			<section className='pt-md-0'>
+			<section className='py-md-0'>
 				<Container>
 					<Row>
 						<Col md='12'>
@@ -85,7 +85,7 @@ const TraversePage = () => {
 				<Container fluid>
 					<Row>
 						<Col xs={{ size: 4 }} className='p-0'>
-							<StaticImage src='../../images/museum.png' alt='museum' quality={100} placeholder='tracedSVG'/>
+							<StaticImage src='../images/museum.png' alt='museum' quality={100} placeholder='tracedSVG'/>
 						</Col>
 					</Row>
 				</Container>
@@ -94,12 +94,12 @@ const TraversePage = () => {
 			<section className='d-md-none'>
 				<Row>
 					<Col xs='8'>
-						<StaticImage src='../../images/museum.png' alt='museum' quality={100} placeholder='tracedSVG'/>
+						<StaticImage src='../images/museum.png' alt='museum' quality={100} placeholder='tracedSVG'/>
 					</Col>
 				</Row>
 				<Row>
 					<Col xs={{ size: 8, offset: 4 }}>
-						<StaticImage src='../../images/quarry.png' alt='quarry' quality={100} placeholder='tracedSVG'/>
+						<StaticImage src='../images/quarry.png' alt='quarry' quality={100} placeholder='tracedSVG'/>
 					</Col>
 				</Row>
 			</section>
