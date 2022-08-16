@@ -27,9 +27,19 @@ const NewsletterForm = ({ toggleModal }) => {
 	});
 
 	const handleOnSubmit = values => {
+		const data = {
+			email: values.email,
+			fieldValues: [
+				{
+				  field: 1,
+				  value: values.nickname
+				}
+			  ],
+		}
+
 		const options = {
 			method: "POST",
-			data: values,
+			data: data,
 			url: "https://us-central1-traverse-serverless-9959d.cloudfunctions.net/createNewContact",
 		};
 
