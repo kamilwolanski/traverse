@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
@@ -7,6 +8,7 @@ import { Form, FormGroup, Label, Input } from "reactstrap";
 import { Container, Row, Col } from "reactstrap";
 
 const NewsletterForm = ({ toggleModal }) => {
+	let [loading, setLoading] = useState(false);
 	const SignupSchema = Yup.object().shape({
 		nickname: Yup.string()
 			.required("Add your nickname and hit the button to subscribe")
@@ -27,15 +29,16 @@ const NewsletterForm = ({ toggleModal }) => {
 	});
 
 	const handleOnSubmit = values => {
+		setLoading(true)
 		const data = {
 			email: values.email,
 			fieldValues: [
 				{
-				  field: 1,
-				  value: values.nickname
-				}
-			  ],
-		}
+					field: 1,
+					value: values.nickname,
+				},
+			],
+		};
 
 		const options = {
 			method: "POST",
@@ -45,18 +48,26 @@ const NewsletterForm = ({ toggleModal }) => {
 
 		axios(options)
 			.then(response => {
-				toggleModal();
+				setLoading(false)
+				toggleModal(["confirmation sent", "", "Check your mailbox and confirm your subscription."]);
 			})
 			.catch(error => {
-				console.log("error", error);
+				setLoading(false)
+				if(error.response.data.status === 422) {
+					toggleModal(["", error.response.data.response.errors[0].title, ""]);
+
+				} else {
+					toggleModal(["", "Something went wrong, please try again later", ""]);
+				}
 			});
 	};
 
 	return (
 		<Container>
 			<Row className='justify-content-center'>
-				<Col md={{ size: 6 }}>
+				<Col md={{ size: 6 }} className="position-relative">
 					<h2 className='light-blue text-center text-md-left'>get traverse updates</h2>
+					<ClipLoader color='#ffffff' loading={loading} className="spinner" />
 					<Form onSubmit={handleSubmit} className='mt-4 mt-md-0'>
 						<FormGroup>
 							<Label for='name'>Nickname *</Label>

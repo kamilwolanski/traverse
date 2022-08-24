@@ -24,7 +24,6 @@ const Seo = ({ title, description, image }) => {
 	);
 
 	const siteOgImage = image || fileName.childImageSharp.gatsbyImageData.images.fallback.src;
-	console.log('site og image', siteOgImage)
 
 	const SeoTags = [
 		{

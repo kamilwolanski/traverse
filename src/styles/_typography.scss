@@ -83,6 +83,7 @@ button {
       width: 100%;
     }
   }
+  
 
   img {
     transition: 0.5s;
@@ -100,6 +101,7 @@ button {
     transform: translate(-50%, -50%);
     text-transform: uppercase;
     color: #818181;
+
     font-size: 16px;
     font-family: "Oswald", sans-serif;
     pointer-events: none;
@@ -175,16 +177,37 @@ button {
 
     img {
       width: 100%;
+
+      @include media-breakpoint-down(sm) {
+        width: 93%;
+      }
     }
 
     .content {
       position: absolute;
       left: 0;
       right: 0;
-      top: 0;
+      top: 10%;
       bottom: 0;
       padding: 120px 0;
 
+      @include media-breakpoint-up(sm) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 10%;
+        bottom: 0;
+        padding: 5px 0;
+      }
+
+      @include media-breakpoint-up(lg) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0%;
+        bottom: 0;
+        padding: 120px 0;
+      }
     }
   }
 }

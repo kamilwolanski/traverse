@@ -27,6 +27,7 @@ import bug1 from "../images/bug_concept.png";
 import bug2 from "../images/bug_voxel.png";
 import logoWhite from "../images/logo-white-stroke.svg";
 import popUpBgc from "../images/popup-glass-shape.svg";
+import popUpBgcMob from "../images/bg-glass-shape-mobile.svg";
 import heroBgc from "../images/top-bg-shape.svg";
 import heroBgcMobile from "../images/top-bg-shape-mobile.svg";
 import glassShapeBgcMobile from "../images/bg-glass-shape-mobile.svg";
@@ -42,6 +43,7 @@ const TraversePage = () => {
 	const { width } = useWindowSize();
 	const onlineUsers = useDiscordOnlineUsers("https://discord.com/api/guilds/400320103830388736/widget.json");
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [subscribedModalCopy, setSubscribedModalCopy] = useState("");
 	const [isSubscibedModalOpen, setIsSubscribedModalOpen] = useState(false);
 	const [embedUrl, setEmbedUrl] = useState(null);
 
@@ -125,7 +127,8 @@ const TraversePage = () => {
 		return slidesToRender;
 	};
 
-	const toggleSubscribedModal = () => {
+	const toggleSubscribedModal = modalCopy => {
+		setSubscribedModalCopy(modalCopy);
 		setIsSubscribedModalOpen(!isSubscibedModalOpen);
 	};
 
@@ -852,16 +855,17 @@ const TraversePage = () => {
 			</Modal>
 
 			<Modal isOpen={isSubscibedModalOpen} toggle={toggleSubscribedModal} centered size='lg' className='subscribe-modal'>
-				<div>
-					<img src={popUpBgc} alt='popup-glass-shape' />
+				<div className='d-flex'>
+					<img src={width > 576 ? popUpBgc : popUpBgcMob} alt='popup-glass-shape' className='mx-auto' />
 					<div className='content'>
 						<Container>
 							<Row>
 								<Col>
-									<h1 className='text-center white'>confirmation sent</h1>
-									<p className='text-center mt-4 light-blue'>Check your mailbox and confirm your subscription.</p>
-									<div className='text-center mt-5'>
-										<button className='mt-5 mb-5 blue-button' onClick={toggleSubscribedModal}>
+									<h1 className='text-center white'>{subscribedModalCopy[0]}</h1>
+									<h2 className='text-center white'>{subscribedModalCopy[1]}</h2>
+									<p className='text-center mt-4 light-blue'>{subscribedModalCopy[2]}</p>
+									<div className='text-center mt-4 mt-md-5'>
+										<button className='mt-3 mt-lg-5 mb-5 blue-button' onClick={toggleSubscribedModal}>
 											<img src={blueButton} alt='' />
 											<p>ok</p>
 										</button>
